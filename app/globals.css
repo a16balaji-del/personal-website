@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply m-0 bg-cream text-ink antialiased;
+}
+
+img {
+  @apply block max-w-full;
+}
+
+::selection {
+  @apply bg-mint text-ink;
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-scale {
+  from {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes nav-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-[4.5rem] lg:py-[6.5rem];
+    animation: fade-rise 760ms ease both;
+    animation-delay: var(--motion-delay, 80ms);
+  }
+
+  .display-title {
+    @apply text-[3.25rem] font-extrabold leading-[0.95] text-pine sm:text-[4rem] lg:text-7xl;
+  }
+
+  .section-title {
+    @apply text-[2rem] font-extrabold leading-[1.08] tracking-normal sm:text-[2.5rem] lg:text-5xl;
+  }
+
+  .body-copy {
+    @apply text-base leading-7 text-muted sm:text-lg;
+  }
+
+  .motion-rise {
+    animation: fade-rise 720ms ease both;
+    animation-delay: var(--motion-delay, 0ms);
+  }
+
+  .motion-scale {
+    animation: soft-scale 950ms ease both;
+    animation-delay: var(--motion-delay, 120ms);
+  }
+
+  .interactive-lift {
+    @apply transition duration-300 ease-out;
+    transition-property: transform, box-shadow, opacity, background-color, border-color;
+  }
+
+  .interactive-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .image-zoom {
+    @apply transition duration-700 ease-out;
+    transition-property: transform, filter;
+  }
+
+  .group:hover .image-zoom {
+    transform: scale(1.045);
+    filter: saturate(1.04) contrast(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .interactive-lift:hover,
+  .group:hover .image-zoom {
+    transform: none;
+  }
+}
